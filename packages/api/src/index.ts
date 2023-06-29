@@ -1,4 +1,5 @@
 import cors from "cors";
+import { connectToDB } from "db";
 import express from "express";
 
 const app = express();
@@ -13,5 +14,7 @@ app.get("/workspaces", (_, response) => {
   ];
   response.json({ data: workspaces });
 });
+
+connectToDB();
 
 app.listen(port, () => console.log(`Listening on https://localhost:${port}`));
