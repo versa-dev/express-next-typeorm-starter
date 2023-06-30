@@ -1,5 +1,5 @@
 import cors from "cors";
-import { connectToDB } from "db";
+import { connectToDB } from "db/connectDB";
 import express from "express";
 
 const app = express();
