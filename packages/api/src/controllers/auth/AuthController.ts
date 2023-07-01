@@ -10,7 +10,7 @@ import {
 @Route("auth")
 export class AuthController extends Controller {
   @Post("/register")
-  async registerUser(@Body() user: User): Promise<void> {
+  async register(@Body() user: User): Promise<void> {
     // Hash the user's password before storing it
     const oneTimePassword = generatePassword();
     const hashedPassword = await hashPassword(oneTimePassword);
@@ -23,9 +23,9 @@ export class AuthController extends Controller {
   }
 
   @Post("/login")
-  async loginUser(
+  async login(
     @Body() credentials: { email: string; password: string }
-  ): Promise<{ token: string }> {
+  ): Promise<{ token: string; user: User; isFirstLogin: boolean }> {
     const { email, password } = credentials;
 
     // Find the user in the database by their email
@@ -36,9 +36,17 @@ export class AuthController extends Controller {
       throw new Error("Invalid email or password");
     }
 
+    const isFirstLogin = user.status === UserStatus.PENDING;
     // Generate a JWT token
     const token = generateToken(user);
 
-    return { token };
+    /**
+     * @TODO should be updated after stripe integration
+     */
+    user.status = UserStatus.TRIAL;
+
+    await user.save();
+
+    return { token, user, isFirstLogin };
   }
 }
