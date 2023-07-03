@@ -1,13 +1,16 @@
 import cors from "cors";
-import { connectToDB } from "db/connectDB";
+import dotenv from "dotenv";
 import express from "express";
+import { connectToDB } from "db/connectDB";
+
+dotenv.config();
 
 const app = express();
 const port = 4000;
 
 app.use(cors({ origin: "http://localhost:3000" }));
 
-app.get("/workspaces", (_, response) => {
+app.get("/test", (_, response) => {
   const workspaces = [
     { name: "api", version: "1.0.0" },
     { name: "web", version: "1.0.0" },
