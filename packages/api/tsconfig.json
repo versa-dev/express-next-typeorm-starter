@@ -13,8 +13,10 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "jsx": "preserve",
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "jsx": "preserve"
+    "strictPropertyInitialization": false
   },
-  "include": ["./src", "db"]
+  "include": ["src/**/*.ts", "db/**/*.ts"]
 }

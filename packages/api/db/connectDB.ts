@@ -4,7 +4,7 @@ import { DataSource, DataSourceOptions } from "typeorm";
 
 const url = process.env.DATABASE_URL || "";
 
-const ORMConfig: DataSourceOptions = {
+export const ORMConfig: DataSourceOptions = {
   type: "postgres",
   url,
   synchronize: false,
@@ -14,9 +14,10 @@ const ORMConfig: DataSourceOptions = {
   migrationsTableName: "migration",
 };
 
+export const dataSource = new DataSource(ORMConfig);
+
 export const connectToDB = async () => {
   try {
-    const dataSource = new DataSource(ORMConfig);
     dataSource.initialize();
     logger.info("Connected to PG Database through TypeORM");
   } catch (error) {
