@@ -6,6 +6,7 @@ import {
   generateToken,
   generatePassword,
 } from "src/utils/auth";
+import { EmailSender } from "src/services/EmailSender/EmailSender";
 
 @Route("auth")
 export class AuthController extends Controller {
@@ -20,6 +21,12 @@ export class AuthController extends Controller {
     user.status = UserStatus.PENDING;
 
     await user.save();
+
+    await EmailSender.sendLoginEmail({
+      firstName: user.name,
+      to: user.email,
+      password: oneTimePassword,
+    });
   }
 
   @Post("/login")

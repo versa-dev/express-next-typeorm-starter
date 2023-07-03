@@ -1,11 +1,12 @@
 import * as sendgrid from "@sendgrid/mail";
 import {
+  DEFAULT_LOGIN_OPTIONS,
   DEFAULT_SEND_OPTIONS,
   SendLoginEmailOptions,
   SendRawOptions,
 } from "./types";
 
-export default class EmailSender {
+export default class TransactionEmailSender {
   constructor() {
     const apiKey = process.env.SENDGRID_API_KEY || "";
 
@@ -37,6 +38,7 @@ export default class EmailSender {
   async sendLoginEmail(input: SendLoginEmailOptions): Promise<void> {
     const { to, from, firstName, password, link } = {
       ...DEFAULT_SEND_OPTIONS,
+      ...DEFAULT_LOGIN_OPTIONS,
       ...input,
     };
 
@@ -44,7 +46,7 @@ export default class EmailSender {
 
     const text = `Hello ${
       firstName ?? ""
-    }! Please login using this password (${password})`;
+    }! This is your first time login password to Quiddle, please reset your password after login: ${password}`;
 
     await this.sendRaw({
       text,
@@ -54,3 +56,5 @@ export default class EmailSender {
     });
   }
 }
+
+export const EmailSender = new TransactionEmailSender();

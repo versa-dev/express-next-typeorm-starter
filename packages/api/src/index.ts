@@ -10,6 +10,8 @@ const port = 4000;
 
 app.use(cors({ origin: "http://localhost:3000" }));
 
+connectToDB();
+
 app.get("/test", (_, response) => {
   const workspaces = [
     { name: "api", version: "1.0.0" },
@@ -17,7 +19,5 @@ app.get("/test", (_, response) => {
   ];
   response.json({ data: workspaces });
 });
-
-connectToDB();
 
 app.listen(port, () => console.log(`Listening on https://localhost:${port}`));
