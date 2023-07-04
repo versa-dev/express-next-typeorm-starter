@@ -12,7 +12,8 @@ import TransactionEmailSender from "./services/EmailSender/EmailSender";
 import * as swaggerJson from "./swagger.json";
 import { RegisterRoutes } from "./routes";
 import logger from "./utils/logger";
-import { AppDataSource } from "./db/datasource";
+
+const { AppDataSource } = require("./db/datasource");
 
 // Create Instance of EmailSender Class
 export const EmailSender = new TransactionEmailSender();
@@ -22,7 +23,7 @@ AppDataSource.initialize()
   .then(() => {
     logger.info("Connected to PG Database through TypeORM");
   })
-  .catch((error) => {
+  .catch((error: any) => {
     logger.error("Error while connecting to the PG Database", {
       error,
     });

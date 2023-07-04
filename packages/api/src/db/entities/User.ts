@@ -1,5 +1,5 @@
 import { Entity, Column } from "typeorm";
-import { Base } from "./Base";
+import { Base } from "../BaseEntity/Base";
 
 export enum UserStatus {
   PENDING = "PENDING",

@@ -9,7 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -21,5 +21,5 @@
       "tsoa": ["node_modules/tsoa"]
     }
   },
-  "include": ["src", "db"]
+  "include": ["src"]
 }
