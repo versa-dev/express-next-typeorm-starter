@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Route, SuccessResponse } from "tsoa";
+import { Body, Controller, Get, Post, Route, SuccessResponse } from "tsoa";
 import { User, UserStatus } from "src/entities/User";
 import {
   hashPassword,
@@ -7,7 +7,6 @@ import {
   generatePassword,
 } from "src/utils/auth";
 import type { RegisterUserInput } from "./types";
-import { AuthRepository } from "src/repositories/AuthRepository/AuthRepository";
 import { EmailSender } from "src";
 
 @Route("auth")
@@ -17,12 +16,15 @@ export class AuthController extends Controller {
   async register(@Body() user: RegisterUserInput): Promise<void> {
     // Hash the user's password before storing it
     const oneTimePassword = generatePassword();
-    const hashedPassword = await hashPassword(oneTimePassword);
+    const password = await hashPassword(oneTimePassword);
+    const { name, email, role } = user;
 
     // Save the user to the database
-    await AuthRepository.createUser({
-      user,
-      password: hashedPassword,
+    const createdUser = User.create({
+      name,
+      email,
+      password,
+      role,
       status: UserStatus.PENDING,
     });
 
@@ -33,6 +35,10 @@ export class AuthController extends Controller {
     });
   }
 
+  @Get()
+  async getUsers(): Promise<any[]> {
+    return await User.find({});
+  }
   // @Post("/login")
   // async login(
   //   @Body() credentials: { email: string; password: string }

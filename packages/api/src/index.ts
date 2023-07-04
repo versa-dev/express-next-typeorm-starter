@@ -10,11 +10,25 @@ import * as swaggerUI from "swagger-ui-express";
 import * as swaggerJson from "./swagger.json";
 
 import { RegisterRoutes } from "./routes";
-import { connectToDB } from "db/connectDB";
+import { ORMConfig } from "db/orm-config";
+import { DataSource } from "typeorm";
+import logger from "./utils/logger";
 
+// Create Instance of EmailSender Class
 export const EmailSender = new TransactionEmailSender();
 
-connectToDB();
+// Connect to DB
+export const dataSource = new DataSource(ORMConfig);
+dataSource
+  .initialize()
+  .then(() => {
+    logger.info("Connected to PG Database through TypeORM");
+  })
+  .catch((error) => {
+    logger.error("Error while connecting to the PG Database", {
+      error,
+    });
+  });
 
 const app = express();
 const port = 4000;
