@@ -8,7 +8,12 @@
     "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --external:express --external:cors",
     "start": "node dist/index.js",
     "gen:swagger": "tsoa spec-and-routes && npx tsc",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "migration:create": "yarn typeorm migration:create",
+    "migration:down": "yarn typeorm migration:revert",
+    "migration:generate": "yarn typeorm migration:generate --pretty",
+    "migration:up": "yarn typeorm migration:run",
+    "pretty": "prettier **/*.ts --write"
   },
   "keywords": [],
   "author": "",
