@@ -1,26 +1,24 @@
-import TransactionEmailSender from "src/services/EmailSender/EmailSender";
-import "reflect-metadata";
-import cors from "cors";
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 dotenv.config();
 
+import "reflect-metadata";
+
+import cors from "cors";
 import express from "express";
 import bodyParser from "body-parser";
 import * as swaggerUI from "swagger-ui-express";
-import * as swaggerJson from "./swagger.json";
 
+import TransactionEmailSender from "./services/EmailSender/EmailSender";
+import * as swaggerJson from "./swagger.json";
 import { RegisterRoutes } from "./routes";
-import { ORMConfig } from "db/orm-config";
-import { DataSource } from "typeorm";
 import logger from "./utils/logger";
+import { AppDataSource } from "./db/datasource";
 
 // Create Instance of EmailSender Class
 export const EmailSender = new TransactionEmailSender();
 
 // Connect to DB
-export const dataSource = new DataSource(ORMConfig);
-dataSource
-  .initialize()
+AppDataSource.initialize()
   .then(() => {
     logger.info("Connected to PG Database through TypeORM");
   })

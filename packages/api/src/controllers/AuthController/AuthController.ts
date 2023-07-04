@@ -20,13 +20,13 @@ export class AuthController extends Controller {
     const { name, email, role } = user;
 
     // Save the user to the database
-    const createdUser = User.create({
+    const createdUser = await User.create({
       name,
       email,
       password,
       role,
       status: UserStatus.PENDING,
-    });
+    }).save();
 
     await EmailSender.sendLoginEmail({
       firstName: user.name,
