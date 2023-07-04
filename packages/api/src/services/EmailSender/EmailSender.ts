@@ -56,5 +56,3 @@ export default class TransactionEmailSender {
     });
   }
 }
-
-export const EmailSender = new TransactionEmailSender();

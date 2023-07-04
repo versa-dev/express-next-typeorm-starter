@@ -6,9 +6,9 @@ import {
   generateToken,
   generatePassword,
 } from "src/utils/auth";
-import { EmailSender } from "src/services/EmailSender/EmailSender";
 import type { RegisterUserInput } from "./types";
 import { AuthRepository } from "src/repositories/AuthRepository/AuthRepository";
+import { EmailSender } from "src";
 
 @Route("auth")
 export class AuthController extends Controller {
@@ -26,11 +26,11 @@ export class AuthController extends Controller {
       status: UserStatus.PENDING,
     });
 
-    // await EmailSender.sendLoginEmail({
-    //   firstName: user.name,
-    //   to: user.email,
-    //   password: oneTimePassword,
-    // });
+    await EmailSender.sendLoginEmail({
+      firstName: user.name,
+      to: user.email,
+      password: oneTimePassword,
+    });
   }
 
   // @Post("/login")

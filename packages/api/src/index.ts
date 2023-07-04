@@ -1,3 +1,4 @@
+import TransactionEmailSender from "src/services/EmailSender/EmailSender";
 import "reflect-metadata";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -10,6 +11,8 @@ import * as swaggerJson from "./swagger.json";
 
 import { RegisterRoutes } from "./routes";
 import { connectToDB } from "db/connectDB";
+
+export const EmailSender = new TransactionEmailSender();
 
 connectToDB();
 
