@@ -11,7 +11,7 @@
     "type-check": "tsc",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:generate": "yarn typeorm -d ./src/db/datasource.ts migration:generate",
-    "migration:create": "yarn typeorm migration:create",
+    "migration:run": "yarn typeorm -d ./src/db/datasource.ts migration:run",
     "pretty": "prettier **/*.ts --write"
   },
   "keywords": [],
@@ -43,6 +43,7 @@
     "@types/node": "20.3.2",
     "@types/swagger-ui-express": "^4.1.3",
     "esbuild": "^0.18.10",
+    "ts-node": "^10.9.1",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6"
   }

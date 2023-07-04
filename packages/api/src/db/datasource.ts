@@ -13,7 +13,7 @@ const ORMConfig = {
   migrations: [path.join(__dirname, "../db/migrations/**/*.{ts,js}")],
   subscribers: [],
   logging: true,
-  synchronize: true,
+  synchronize: false,
 };
 
 const AppDataSource = new DataSource(ORMConfig);

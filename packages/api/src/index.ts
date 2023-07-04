@@ -12,8 +12,7 @@ import TransactionEmailSender from "./services/EmailSender/EmailSender";
 import * as swaggerJson from "./swagger.json";
 import { RegisterRoutes } from "./routes";
 import logger from "./utils/logger";
-
-const { AppDataSource } = require("./db/datasource");
+import { AppDataSource } from "./db/database";
 
 // Create Instance of EmailSender Class
 export const EmailSender = new TransactionEmailSender();
