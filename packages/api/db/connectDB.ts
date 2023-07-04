@@ -9,10 +9,11 @@ const url = process.env.DATABASE_URL || "";
 export const ORMConfig: DataSourceOptions = {
   type: "postgres",
   url,
-  synchronize: false,
   entities: [User],
   migrations: [path.join(__dirname, "migrations/*{.ts,.js}")],
   subscribers: [path.join(__dirname, "subscribers/*{.ts,.js}")],
+  logging: true,
+  synchronize: false,
 };
 
 export const connectToDB = async () => {

@@ -16,7 +16,10 @@
     "jsx": "preserve",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "paths": {
+      "tsoa": ["node_modules/tsoa"]
+    }
   },
-  "include": ["src/**/*.ts", "db/**/*.ts"]
+  "include": ["src", "db"]
 }

@@ -1,9 +1,7 @@
-import { ORMConfig } from "db/connectDB";
+import dataSource from "db/datasource";
 import { RegisterUserInput } from "src/controllers/AuthController/types";
 import { User, UserStatus } from "src/entities/User";
 import { DataSource } from "typeorm";
-
-const dataSource = new DataSource(ORMConfig);
 
 export const AuthRepository = dataSource.getRepository(User).extend({
   async createUser({

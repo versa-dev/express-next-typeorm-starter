@@ -26,11 +26,11 @@ export class AuthController extends Controller {
       status: UserStatus.PENDING,
     });
 
-    await EmailSender.sendLoginEmail({
-      firstName: user.name,
-      to: user.email,
-      password: oneTimePassword,
-    });
+    // await EmailSender.sendLoginEmail({
+    //   firstName: user.name,
+    //   to: user.email,
+    //   password: oneTimePassword,
+    // });
   }
 
   // @Post("/login")

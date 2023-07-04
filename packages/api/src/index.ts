@@ -1,6 +1,8 @@
 import "reflect-metadata";
 import cors from "cors";
 import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import bodyParser from "body-parser";
 import * as swaggerUI from "swagger-ui-express";
@@ -9,14 +11,12 @@ import * as swaggerJson from "./swagger.json";
 import { RegisterRoutes } from "./routes";
 import { connectToDB } from "db/connectDB";
 
-dotenv.config();
+connectToDB();
 
 const app = express();
 const port = 4000;
 
 app.use(cors({ origin: "http://localhost:3000" }));
-
-connectToDB();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
