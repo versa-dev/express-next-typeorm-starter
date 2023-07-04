@@ -13,14 +13,14 @@ import {
 
 export class Base extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
-  uuid!: string;
+  uuid: string;
 
   @Column()
   @CreateDateColumn({
     type: "timestamp with time zone",
     nullable: false,
   })
-  createdAt!: Date;
+  createdAt: Date;
 
   @Column()
   @UpdateDateColumn({
@@ -28,12 +28,12 @@ export class Base extends BaseEntity {
     nullable: true,
     default: null,
   })
-  updatedAt!: Date;
+  updatedAt: Date;
 
   @DeleteDateColumn({
     type: "timestamp with time zone",
     nullable: true,
     default: null,
   })
-  deletedAt!: Date | null;
+  deletedAt: Date | null;
 }

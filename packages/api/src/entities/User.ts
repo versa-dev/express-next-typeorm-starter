@@ -20,31 +20,31 @@ export class User extends Base {
     type: "varchar",
     nullable: false,
   })
-  name!: string;
+  name: string;
 
   @Column({
     type: "varchar",
     nullable: false,
   })
-  email!: string;
+  email: string;
 
   @Column({
     type: "varchar",
     nullable: false,
   })
-  password!: string;
+  password: string;
 
   @Column({
     type: "enum",
     enum: UserRole,
     nullable: false,
   })
-  role!: string;
+  role: string;
 
   @Column({
     type: "enum",
     enum: UserStatus,
     nullable: false,
   })
-  status!: UserStatus;
+  status: UserStatus;
 }
