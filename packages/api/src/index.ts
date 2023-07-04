@@ -24,7 +24,9 @@ app.use(cors({ origin: "http://localhost:3000" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-RegisterRoutes(app);
+const router = express.Router();
+RegisterRoutes(router);
+app.use("/api", router);
 
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerJson));
 
