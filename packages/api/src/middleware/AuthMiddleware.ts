@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { verifyToken } from "src/utils/auth";
 
-const PUBLIC_ENDPOINTS = ["/v0/register", "/v0/login"];
+const PUBLIC_ENDPOINTS = ["/v0/auth/register", "/v0/auth/login"];
 
 export const authMiddleware = async (
   req: Request,

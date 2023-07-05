@@ -13,6 +13,8 @@ import { RegisterRoutes } from "./swagger/v0/routes";
 import logger from "./utils/logger";
 import { AppDataSource } from "./db/database";
 import { authMiddleware } from "./middleware/AuthMiddleware";
+import { notFoundHandler } from "./middleware/notFoundHandler";
+import { errorHandler } from "./middleware/errorHandler";
 
 // Create Instance of EmailSender Class
 export const EmailSender = new TransactionEmailSender();
@@ -44,5 +46,9 @@ app.use("/v0", router);
 
 // API Docs with Swagger
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerJson));
+
+// Error handling middleware
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 app.listen(port, () => console.log(`Listening on https://localhost:${port}`));

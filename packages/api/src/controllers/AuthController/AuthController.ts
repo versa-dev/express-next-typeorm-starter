@@ -8,6 +8,7 @@ import {
 } from "src/utils/auth";
 import type { RegisterUserInput } from "./types";
 import { EmailSender } from "src";
+import { ConflictError } from "@/middleware/types";
 
 @Route("auth")
 export class AuthController extends Controller {
@@ -19,12 +20,14 @@ export class AuthController extends Controller {
     const password = await hashPassword(oneTimePassword);
     const { name, email, role } = user;
 
+    // Check if the user is already exist
     const userInDB = await User.findOne({ where: { email } });
     if (userInDB) {
+      throw new ConflictError("User is already registered");
     }
 
     // Save the user to the database
-    const createdUser = await User.create({
+    const newUser = await User.create({
       name,
       email,
       password,
@@ -32,6 +35,7 @@ export class AuthController extends Controller {
       status: UserStatus.PENDING,
     }).save();
 
+    // Sending email to the new user for one-time password
     await EmailSender.sendLoginEmail({
       firstName: user.name,
       to: user.email,
