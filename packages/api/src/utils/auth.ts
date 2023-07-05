@@ -34,7 +34,7 @@ export const verifyToken = (token: string): JwtPayload => {
     return decoded;
   } catch (error) {
     // Token verification failed
-    throw new Error();
+    throw new Error("Invalid token");
   }
 };
 

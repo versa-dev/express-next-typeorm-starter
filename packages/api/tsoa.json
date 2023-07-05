@@ -3,10 +3,21 @@
   "noImplicitAdditionalProperties": "throw-on-extras",
   "controllerPathGlobs": ["src/**/*Controller.ts"],
   "spec": {
-    "outputDirectory": "src",
-    "specVersion": 3
+    "outputDirectory": "src/swagger/v0",
+    "version": "0.1.0",
+    "specVersion": 3,
+    "schemes": ["https"],
+    "basePath": "/v0",
+    "securityDefinitions": {
+      "role": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "description": "JWT authorization token with role claim"
+      }
+    }
   },
   "routes": {
-    "routesDir": "src"
+    "routesDir": "src/swagger/v0"
   }
 }

@@ -7,7 +7,7 @@
     "dev": "tsx watch src/index.ts",
     "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --external:express --external:cors",
     "start": "node dist/index.js",
-    "gen:swagger": "tsoa spec-and-routes --basePath /api && npx tsc",
+    "gen:swagger": "tsoa spec-and-routes && npx tsc",
     "type-check": "tsc",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:generate": "yarn typeorm -d ./src/db/datasource.ts migration:generate",

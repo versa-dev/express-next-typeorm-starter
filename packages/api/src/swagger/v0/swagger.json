@@ -34,11 +34,18 @@
 				"type": "object"
 			}
 		},
-		"securitySchemes": {}
+		"securitySchemes": {
+			"role": {
+				"type": "apiKey",
+				"name": "Authorization",
+				"in": "header",
+				"description": "JWT authorization token with role claim"
+			}
+		}
 	},
 	"info": {
 		"title": "api",
-		"version": "1.0.0",
+		"version": "0.1.0",
 		"license": {
 			"name": "ISC"
 		},
@@ -91,7 +98,7 @@
 	},
 	"servers": [
 		{
-			"url": "/api"
+			"url": "/v0"
 		}
 	]
 }

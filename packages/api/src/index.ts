@@ -9,8 +9,8 @@ import bodyParser from "body-parser";
 import * as swaggerUI from "swagger-ui-express";
 
 import TransactionEmailSender from "./services/EmailSender/EmailSender";
-import * as swaggerJson from "./swagger.json";
-import { RegisterRoutes } from "./routes";
+import * as swaggerJson from "./swagger/v0/swagger.json";
+import { RegisterRoutes } from "./swagger/v0/routes";
 import logger from "./utils/logger";
 import { AppDataSource } from "./db/database";
 
