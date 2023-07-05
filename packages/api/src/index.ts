@@ -13,6 +13,7 @@ import * as swaggerJson from "./swagger/v0/swagger.json";
 import { RegisterRoutes } from "./swagger/v0/routes";
 import logger from "./utils/logger";
 import { AppDataSource } from "./db/database";
+import { authMiddleware } from "./middleware/AuthMiddleware";
 
 // Create Instance of EmailSender Class
 export const EmailSender = new TransactionEmailSender();
@@ -36,9 +37,10 @@ app.use(cors({ origin: "http://localhost:3000" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(authMiddleware);
 const router = express.Router();
 RegisterRoutes(router);
-app.use("/api", router);
+app.use("/v0", router);
 
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerJson));
 
