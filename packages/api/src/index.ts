@@ -2,7 +2,6 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 import "reflect-metadata";
-
 import cors from "cors";
 import express from "express";
 import bodyParser from "body-parser";
@@ -38,18 +37,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(authMiddleware);
+
 const router = express.Router();
 RegisterRoutes(router);
 app.use("/v0", router);
 
+// API Docs with Swagger
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerJson));
-
-app.get("/test", (_, response) => {
-  const workspaces = [
-    { name: "api", version: "1.0.0" },
-    { name: "web", version: "1.0.0" },
-  ];
-  response.json({ data: workspaces });
-});
 
 app.listen(port, () => console.log(`Listening on https://localhost:${port}`));

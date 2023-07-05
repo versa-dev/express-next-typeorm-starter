@@ -18,7 +18,8 @@
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
     "paths": {
-      "tsoa": ["node_modules/tsoa"]
+      "tsoa": ["node_modules/tsoa"],
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src"]

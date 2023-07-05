@@ -19,6 +19,10 @@ export class AuthController extends Controller {
     const password = await hashPassword(oneTimePassword);
     const { name, email, role } = user;
 
+    const userInDB = await User.findOne({ where: { email } });
+    if (userInDB) {
+    }
+
     // Save the user to the database
     const createdUser = await User.create({
       name,
@@ -39,25 +43,25 @@ export class AuthController extends Controller {
   async getUsers(): Promise<any[]> {
     return await User.find({});
   }
-  // @Post("/login")
-  // async login(
-  //   @Body() credentials: { email: string; password: string }
-  // ): Promise<{ token: string; user: User; isFirstLogin: boolean }> {
-  //   const { email, password } = credentials;
-  //   // Find the user in the database by their email
-  //   const user = await User.findOne({ where: { email } });
-  //   // If the user doesn't exist or the password is incorrect, throw an error
-  //   if (!user || !(await comparePassword(password, user.password))) {
-  //     throw new Error("Invalid email or password");
-  //   }
-  //   const isFirstLogin = user.status === UserStatus.PENDING;
-  //   // Generate a JWT token
-  //   const token = generateToken(user);
-  //   /**
-  //    * @TODO should be updated after stripe integration
-  //    */
-  //   user.status = UserStatus.TRIAL;
-  //   await user.save();
-  //   return { token, user, isFirstLogin };
-  // }
+  @Post("/login")
+  async login(
+    @Body() credentials: { email: string; password: string }
+  ): Promise<{ token: string; user: User; isFirstLogin: boolean }> {
+    const { email, password } = credentials;
+    // Find the user in the database by their email
+    const user = await User.findOne({ where: { email } });
+    // If the user doesn't exist or the password is incorrect, throw an error
+    if (!user || !(await comparePassword(password, user.password))) {
+      throw new Error("Invalid email or password");
+    }
+    const isFirstLogin = user.status === UserStatus.PENDING;
+    // Generate a JWT token
+    const token = generateToken(user);
+    /**
+     * @TODO should be updated after stripe integration
+     */
+    user.status = UserStatus.TRIAL;
+    await user.save();
+    return { token, user, isFirstLogin };
+  }
 }
