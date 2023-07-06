@@ -19,6 +19,12 @@ export class ConflictError extends Error {
   }
 }
 
+export class NotFoundError extends Error {
+  constructor(message = "Not found") {
+    super(message);
+  }
+}
+
 export enum HttpStatusCodes {
   /** The request succeeded. */
   OK = 200,

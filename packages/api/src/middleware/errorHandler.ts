@@ -4,6 +4,7 @@ import {
   ConflictError,
   ForbiddenError,
   HttpStatusCodes,
+  NotFoundError,
 } from "./types";
 import { NextFunction, Request, Response } from "express";
 import { ValidateError } from "tsoa";
@@ -38,6 +39,12 @@ export function errorHandler(
 
   if (err instanceof ConflictError) {
     return res.status(HttpStatusCodes.CONFLICT).json({
+      message: err.message,
+    });
+  }
+
+  if (err instanceof NotFoundError) {
+    return res.status(HttpStatusCodes.NOT_FOUND).json({
       message: err.message,
     });
   }

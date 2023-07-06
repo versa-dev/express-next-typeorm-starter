@@ -32,6 +32,56 @@
 					"name"
 				],
 				"type": "object"
+			},
+			"UserStatus": {
+				"enum": [
+					"PENDING",
+					"TRIAL",
+					"SUSPEND",
+					"ACTIVE"
+				],
+				"type": "string"
+			},
+			"UserDto": {
+				"properties": {
+					"status": {
+						"$ref": "#/components/schemas/UserStatus"
+					},
+					"role": {
+						"$ref": "#/components/schemas/UserRole"
+					},
+					"email": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"status",
+					"role",
+					"email",
+					"name"
+				],
+				"type": "object"
+			},
+			"LoginPayload": {
+				"properties": {
+					"isFirstLogin": {
+						"type": "boolean"
+					},
+					"user": {
+						"$ref": "#/components/schemas/UserDto"
+					},
+					"token": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"user",
+					"token"
+				],
+				"type": "object"
 			}
 		},
 		"securitySchemes": {
@@ -75,24 +125,45 @@
 				}
 			}
 		},
-		"/auth": {
-			"get": {
-				"operationId": "GetUsers",
+		"/auth/login": {
+			"post": {
+				"operationId": "Login",
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
-									"items": {},
-									"type": "array"
+									"$ref": "#/components/schemas/LoginPayload"
 								}
 							}
 						}
 					}
 				},
 				"security": [],
-				"parameters": []
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"password": {
+										"type": "string"
+									},
+									"email": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"password",
+									"email"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
 			}
 		}
 	},

@@ -39,7 +39,7 @@ export class User extends Base {
     enum: UserRole,
     nullable: false,
   })
-  role: string;
+  role: UserRole;
 
   @Column({
     type: "enum",

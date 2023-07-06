@@ -19,5 +19,11 @@
   },
   "routes": {
     "routesDir": "src/swagger/v0"
+  },
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }
