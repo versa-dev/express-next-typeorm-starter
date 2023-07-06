@@ -6,19 +6,8 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"UserRole": {
-				"enum": [
-					"ADMIN",
-					"STUDENT",
-					"TEACHER"
-				],
-				"type": "string"
-			},
 			"RegisterUserInput": {
 				"properties": {
-					"role": {
-						"$ref": "#/components/schemas/UserRole"
-					},
 					"email": {
 						"type": "string"
 					},
@@ -27,11 +16,19 @@
 					}
 				},
 				"required": [
-					"role",
 					"email",
 					"name"
 				],
 				"type": "object"
+			},
+			"UserRole": {
+				"enum": [
+					"SUPER_ADMIN",
+					"ADMIN",
+					"STUDENT",
+					"TEACHER"
+				],
+				"type": "string"
 			},
 			"UserStatus": {
 				"enum": [
@@ -55,13 +52,17 @@
 					},
 					"name": {
 						"type": "string"
+					},
+					"id": {
+						"type": "string"
 					}
 				},
 				"required": [
 					"status",
 					"role",
 					"email",
-					"name"
+					"name",
+					"id"
 				],
 				"type": "object"
 			},
@@ -164,6 +165,61 @@
 						}
 					}
 				}
+			}
+		},
+		"/users/{userId}": {
+			"delete": {
+				"operationId": "DeleteUser",
+				"responses": {
+					"204": {
+						"description": ""
+					}
+				},
+				"security": [
+					{
+						"role": [
+							"SUPER_ADMIN"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/users": {
+			"get": {
+				"operationId": "GetAdminUsers",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/UserDto"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"role": [
+							"SUPER_ADMIN"
+						]
+					}
+				],
+				"parameters": []
 			}
 		}
 	},

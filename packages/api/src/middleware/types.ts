@@ -1,4 +1,4 @@
-import { User } from "@/entities/User";
+import { User } from "@/db/entities/User";
 import { Request } from "express";
 
 export class AuthenticateError extends Error {

@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 import path from "path";
-import { Base } from "src/entities/Base";
-import { User } from "src/entities/User";
+import { Base } from "./BaseEntity/Base";
+import { User } from "./entities/User";
 import { DataSource, DataSourceOptions } from "typeorm";
 
 dotenv.config();

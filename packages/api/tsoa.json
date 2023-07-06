@@ -18,7 +18,8 @@
     }
   },
   "routes": {
-    "routesDir": "src/swagger/v0"
+    "routesDir": "src/swagger/v0",
+    "authenticationModule": "src/swagger/v0/authentication.ts"
   },
   "compilerOptions": {
     "baseUrl": ".",

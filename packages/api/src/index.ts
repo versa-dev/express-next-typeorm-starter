@@ -12,7 +12,6 @@ import * as swaggerJson from "./swagger/v0/swagger.json";
 import { RegisterRoutes } from "./swagger/v0/routes";
 import logger from "./utils/logger";
 import { AppDataSource } from "./db/database";
-import { authMiddleware } from "./middleware/AuthMiddleware";
 import { notFoundHandler } from "./middleware/notFoundHandler";
 import { errorHandler } from "./middleware/errorHandler";
 
@@ -37,8 +36,6 @@ app.use(cors({ origin: "http://localhost:3000" }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-app.use(authMiddleware);
 
 const router = express.Router();
 RegisterRoutes(router);

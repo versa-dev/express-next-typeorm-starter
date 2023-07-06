@@ -1,5 +1,5 @@
 import { Body, Controller, Post, Route, SuccessResponse } from "tsoa";
-import { User, UserStatus } from "@/entities/User";
+import { User, UserRole, UserStatus } from "@/db/entities/User";
 import {
   hashPassword,
   comparePassword,
@@ -18,7 +18,7 @@ export class AuthController extends Controller {
     // Hash the user's password before storing it
     const oneTimePassword = generatePassword();
     const password = await hashPassword(oneTimePassword);
-    const { name, email, role } = user;
+    const { name, email } = user;
 
     // Check if the user is already exist
     const userInDB = await User.findOne({ where: { email } });
@@ -31,7 +31,7 @@ export class AuthController extends Controller {
       name,
       email,
       password,
-      role,
+      role: UserRole.ADMIN,
       status: UserStatus.PENDING,
     }).save();
 
@@ -68,6 +68,7 @@ export class AuthController extends Controller {
     await user.save();
 
     const userDto: UserDto = {
+      id: user.uuid,
       name: user.name,
       email: user.email,
       role: user.role,

@@ -23,6 +23,9 @@ importers:
       '@tsoa/runtime':
         specifier: ^5.0.0
         version: 5.0.0
+      basic-auth:
+        specifier: ^2.0.1
+        version: 2.0.1
       bcryptjs:
         specifier: ^2.4.3
         version: 2.4.3
@@ -60,6 +63,9 @@ importers:
         specifier: ^3.9.0
         version: 3.9.0
     devDependencies:
+      '@types/basic-auth':
+        specifier: ^1.1.3
+        version: 1.1.3
       '@types/bcryptjs':
         specifier: ^2.4.2
         version: 2.4.2
@@ -888,6 +894,12 @@ packages:
       validator: 13.9.0
     dev: false
 
+  /@types/basic-auth@1.1.3:
+    resolution: {integrity: sha512-W3rv6J0IGlxqgE2eQ2pTb0gBjaGtejQpJ6uaCjz3UQ65+TFTPC5/lAE+POfx1YLdjtxvejJzsIAfd3MxWiVmfg==}
+    dependencies:
+      '@types/node': 20.3.2
+    dev: true
+
   /@types/bcryptjs@2.4.2:
     resolution: {integrity: sha512-LiMQ6EOPob/4yUL66SZzu6Yh77cbzJFYll+ZfaPiPPFswtIlA/Fs1MzdKYA7JApHU49zQTbJGX3PDmCpIdDBRQ==}
     dev: true
@@ -1275,6 +1287,13 @@ packages:
 
   /base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+    dev: false
+
+  /basic-auth@2.0.1:
+    resolution: {integrity: sha512-NF+epuEdnUYVlGuhaxbbq+dvJttwLnGY+YixlXlME5KpQ5W3CnXA5cVTneY3SPbPDRkcjMbifrwmFYcClgOZeg==}
+    engines: {node: '>= 0.8'}
+    dependencies:
+      safe-buffer: 5.1.2
     dev: false
 
   /bcryptjs@2.4.3:
@@ -3831,6 +3850,10 @@ packages:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
     dependencies:
       queue-microtask: 1.2.3
+    dev: false
+
+  /safe-buffer@5.1.2:
+    resolution: {integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==}
     dev: false
 
   /safe-buffer@5.2.1:

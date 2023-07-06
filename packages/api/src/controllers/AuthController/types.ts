@@ -1,12 +1,12 @@
-import { UserRole, UserStatus } from "@/entities/User";
+import { UserRole, UserStatus } from "@/db/entities/User";
 
 export type RegisterUserInput = {
   name: string;
   email: string;
-  role: UserRole;
 };
 
 export type UserDto = {
+  id: string;
   name: string;
   email: string;
   role: UserRole;

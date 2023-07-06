@@ -9,6 +9,7 @@ export enum UserStatus {
 }
 
 export enum UserRole {
+  SUPER_ADMIN = "SUPER_ADMIN",
   ADMIN = "ADMIN",
   STUDENT = "STUDENT",
   TEACHER = "TEACHER",
@@ -39,7 +40,7 @@ export class User extends Base {
     enum: UserRole,
     nullable: false,
   })
-  role: string;
+  role: UserRole;
 
   @Column({
     type: "enum",

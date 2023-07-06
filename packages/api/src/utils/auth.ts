@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { User } from "src/entities/User";
+import { User } from "@/db/entities/User";
+import { AuthenticateError } from "@/middleware/types";
 
 export const hashPassword = async (password: string): Promise<string> => {
   const salt = await bcrypt.genSalt(10);
@@ -34,7 +35,7 @@ export const verifyToken = (token: string): JwtPayload => {
     return decoded;
   } catch (error) {
     // Token verification failed
-    throw new Error("Invalid token");
+    throw new AuthenticateError("Invalid token");
   }
 };
 
